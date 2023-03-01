@@ -2,3 +2,7 @@
 Started project. Set python working enviornment in bigfish-python3.6.
 Installed Tk
 Created folder and named foders
+02/28/22
+Added Spot detection
+Added detection plot and shadow plot
+TODO:Merged detection plot and shadow plot and output as one single composite

@@ -3,7 +3,8 @@ from tkinter import filedialog
 import os
 import glob
 import numpy as np
-
+import tifffile
+import bigfish.stack as stack
 
 # Load files from the selected directory
 # Open up a tk window and ask for directory input
@@ -22,3 +23,6 @@ print(filename)
 # Input image array
 image_array = np.load(filename)
 # Deal with background
+# Apply a white tophat filter
+image_bgremoval = stack.remove_background_gaussian(image_array, 1.1)
+tifffile.imwrite("results/gaussian_filtered_1.1.tif", image_bgremoval, photometric = 'minisblack')
