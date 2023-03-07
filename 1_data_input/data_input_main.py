@@ -22,3 +22,4 @@ print(filename)
 # Input 633 image
 image_array = tifffile.imread(filename)
 np.save("image_array.npy", image_array)
+
