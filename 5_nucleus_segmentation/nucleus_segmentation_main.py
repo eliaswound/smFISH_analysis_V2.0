@@ -8,6 +8,9 @@ from csbdeep.utils import normalize
 import os
 from stardist import random_label_cmap
 from stardist.models import StarDist3D
+
+from skimage import segmentation
+
 np.random.seed(42)
 lbl_cmap = random_label_cmap()
 
@@ -48,3 +51,6 @@ img = normalize(X[0], 0.2,99.8, axis=axis_norm)
 labels, details = model.predict_instances(img,nms_thresh = 0.3,prob_thresh =0.6)
 # Write file and labels
 tifffile.imwrite("results/Nucleus_Labels.tif", labels)
+
+expanded_labels = segmentation.expand_labels(labels, distance=20)
+tifffile.imwrite("results/Nucleus_ExpandLabels.tif", expanded_labels)

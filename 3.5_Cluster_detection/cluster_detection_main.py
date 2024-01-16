@@ -25,7 +25,7 @@ imarray = np.load(filename)
 os.chdir("results")
 spot = np.load("spot_modified.npy")
 voxel_size = (361, 64, 64)
-declustering_parameters = (600, 9)
+declustering_parameters = (600, 6)
 greeks = (0.7, 1, 5)
 spot_size = (600, 250, 250)
 # First number alpha: Impact number of spots in each regtion

@@ -1,4 +1,51 @@
-def detection_plot(image_shape, filepath):
+def generate_coordinates_inner(x, y, time):
+    # Initial collection with the starting coordinate (x, y)
+    coordinates_collection = [(x, y)]
+
+    for _ in range(time):
+        # Copy the current collection to avoid modifying it while iterating
+        current_coordinates = coordinates_collection.copy()
+
+        # Loop through each coordinate in the current collection
+        for coord in current_coordinates:
+            # Extract x and y values from the coordinate
+            cx, cy = coord
+
+            # Add neighboring coordinates to the collection
+            coordinates_collection.extend([(cx + 1, cy), (cx - 1, cy), (cx, cy + 1), (cx, cy - 1)])
+
+    # Remove duplicates by converting the list to a set and then back to a list
+    coordinates_collection = list(set(coordinates_collection))
+
+    return coordinates_collection
+
+def generate_coordinates_outer(x, y, time):
+    # Initial collection with the starting coordinate (x, y)
+    coordinates_collection = [(x, y)]
+
+    for _ in range(time):
+        # Copy the current collection to avoid modifying it while iterating
+        current_coordinates = coordinates_collection.copy()
+
+        # Loop through each coordinate in the current collection
+        for coord in current_coordinates:
+            # Extract x and y values from the coordinate
+            cx, cy = coord
+
+            # Add neighboring coordinates to the collection
+            coordinates_collection.extend([(cx + 1, cy), (cx - 1, cy), (cx, cy + 1), (cx, cy - 1)])
+
+    # Remove duplicates by converting the list to a set and then back to a list
+    coordinates_collection = list(set(coordinates_collection))
+
+    # Filter coordinates that were added up to the specified time
+    coordinates_collection = [coord for coord in coordinates_collection if abs(coord[0]-x) + abs(coord[1]- y) == time]
+
+    return coordinates_collection
+
+
+
+def detection_plot(image_shape, filepath, plot_size):
     """
     :param np.shape of a image
     :param spot: spot need to be plotted
@@ -24,22 +71,13 @@ def detection_plot(image_shape, filepath):
         elif z == 0 or z == z_lim:
             np.delete(spot, spot[i])
         else:
-            empty_image[z, x, y] = 255
-            empty_image[z, x + 2, y] = 255
-            empty_image[z, x + 1, y + 1] = 255
-            empty_image[z, x + 1, y] = 255
-            empty_image[z, x + 1, y - 1] = 255
-            empty_image[z, x, y + 1] = 255
-            empty_image[z, x, y + 2] = 255
-            empty_image[z, x, y - 1] = 255
-            empty_image[z, x, y - 2] = 255
-            empty_image[z, x - 2, y] = 255
-            empty_image[z, x - 1, y + 1] = 255
-            empty_image[z, x - 1, y] = 255
-            empty_image[z, x - 1, y - 1] = 255
+            coordinates = generate_coordinates_inner(x,y,plot_size)
+            for item in coordinates:
+                empty_image[z,item[0],item[1]] = 255
+
 
     return spot, empty_image
-def shadow_plot(image_shape, filepath):
+def shadow_plot(image_shape, filepath, plot_size):
     """
     :param image_shape: image shape 
     :param filepath: current file path 
@@ -65,28 +103,8 @@ def shadow_plot(image_shape, filepath):
         elif z == 1 or z == z_lim:
             np.delete(spot, spot[i])
         else:
-            empty_image2[z + 1, x + 3, y] = 255
-            empty_image2[z + 1, x - 3, y] = 255
-            empty_image2[z + 1, x + 2, y + 1] = 255
-            empty_image2[z + 1, x + 2, y - 1] = 255
-            empty_image2[z + 1, x + 1, y + 2] = 255
-            empty_image2[z + 1, x + 1, y - 2] = 255
-            empty_image2[z + 1, x - 2, y - 1] = 255
-            empty_image2[z + 1, x - 2, y + 1] = 255
-            empty_image2[z + 1, x - 1, y - 2] = 255
-            empty_image2[z + 1, x - 1, y + 2] = 255
-            empty_image2[z + 1, x, y + 3] = 255
-            empty_image2[z + 1, x, y - 3] = 255
-            empty_image2[z - 1, x + 3, y] = 255
-            empty_image2[z - 1, x - 3, y] = 255
-            empty_image2[z - 1, x + 2, y + 1] = 255
-            empty_image2[z - 1, x + 2, y - 1] = 255
-            empty_image2[z - 1, x + 1, y + 2] = 255
-            empty_image2[z - 1, x + 1, y - 2] = 255
-            empty_image2[z - 1, x - 2, y - 1] = 255
-            empty_image2[z - 1, x - 2, y + 1] = 255
-            empty_image2[z - 1, x - 1, y - 2] = 255
-            empty_image2[z - 1, x - 1, y + 2] = 255
-            empty_image2[z - 1, x, y + 3] = 255
-            empty_image2[z - 1, x, y - 3] = 255
+            coordinates = generate_coordinates_outer(x,y,plot_size+1)
+            for item in coordinates:
+                empty_image2[z+1,item[0],item[1]] = 255
+                empty_image2[z-1,item[0],item[1]] = 255
     return empty_image2
