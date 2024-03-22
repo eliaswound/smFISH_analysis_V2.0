@@ -1,0 +1,2 @@
+For low-res planarian nucleus, where voxel size > 0.3um and/or each nucleus direct run nucleus segmentation_main.py.
+For high-res planarian nucleus, where voxel size <0.06um save the file to sequence. Run 2D single_stack_segmentation while changing the parameters.
