@@ -16,7 +16,7 @@ root.destroy()
 os.chdir(pathname)
 # Grab all tif files in the folder
 filename = glob.glob('*.npy')[0]
-plot_size = 6
+plot_size = 3
 # Print working directory and filename to confirm we are at the correct path
 print(os.getcwd())
 print(filename)
