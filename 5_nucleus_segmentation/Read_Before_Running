@@ -1,2 +1,6 @@
-For low-res planarian nucleus, where voxel size > 0.3um and/or each nucleus direct run nucleus segmentation_main.py.
-For high-res planarian nucleus, where voxel size <0.06um save the file to sequence. Run 2D single_stack_segmentation while changing the parameters.
+This is a instruction on using stardist on planarians nuclei.
+I saved the old 3D using 3D demo model on for_reference_old_3D_segmentation.py.
+Do not use this code, just use it as a reference for running 3D segmentation and creating labels.
+2D_single_stack_segmentation_main.py and 2D_single_stack_segmentation_quest.py are used for local and on-server segmentation on 2D.
+Later on I will decide what is the next step for this code.
+Maybe I will add training model in 3D and other codes instead, so please let me take my time to develop.
