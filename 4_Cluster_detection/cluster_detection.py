@@ -10,8 +10,7 @@ def cluster_decomposition(imarray,spots,voxel_size,spot_size,greeks,filepath = "
     """
     import os
     import bigfish.detection
-    import bigfish.plot as plot
-    import bigfish.stack as stack
+    import numpy as np
     os.chdir(filepath)
     alpha = greeks[0]
     beta = greeks[1]
@@ -24,6 +23,7 @@ def cluster_decomposition(imarray,spots,voxel_size,spot_size,greeks,filepath = "
     alpha=alpha,  # alpha impacts the number of spots per candidate region
     beta=beta,  # beta impacts the number of candidate regions to decompose
     gamma=gamma)  # gamma the filtering step to denoise the image
+    np.save(spots_post_decomposition,'spots_post_decomposition.npy')
     with open("spots_info_Decomposition.txt","w") as file :
         file.write("detected spots before decomposition")
         file.write("\r shape: {0}".format(spots.shape))

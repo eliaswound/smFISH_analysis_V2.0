@@ -18,7 +18,7 @@ image_shape = get_image_size(pathname)
 # change directory to results folder
 os.chdir("results")
 # Run detection plot
-spot_modified, spot_plot = detection_plot(image_shape, os.getcwd(),plot_size)
+spot_modified, spot_plot = detection_plot(image_shape, os.getcwd(), plot_size)
 shadow = shadow_plot(image_shape, os.getcwd(),plot_size)
 # Save image and modified spot
 np.save("spot_modified.npy", spot_modified)

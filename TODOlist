@@ -1,0 +1,7 @@
+Todo:
+1. Put Cluster detection as one central process of this code, and plot with the detection plot method.
+2. Add Extact spot information.
+3. Add load background image and detection
+4. Add finding threshold for Gaussing fitting and spot intensity
+5. Rule out spot using Gaussian fitting filter and intensity filter.
+6. Plot the final detected image with plot.
